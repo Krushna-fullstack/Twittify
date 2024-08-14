@@ -54,11 +54,11 @@ export const signup = async (req, res) => {
         coverImg: newUser.coverImg,
       });
     } else {
-      return res.status(400).json({ message: "Invalid user data" });
+      return res.status(400).json({ error: "Invalid user data" });
     }
   } catch (error) {
     console.log("Error in signup: ", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -72,7 +72,7 @@ export const login = async (req, res) => {
     );
 
     if (!user || !isPasswordCorrect) {
-      return res.status(400).json({ message: "Invalid username or password" });
+      return res.status(400).json({ error: "Invalid username or password" });
     }
 
     generateTokenAndSetCookie(user._id, res);
@@ -88,7 +88,7 @@ export const login = async (req, res) => {
     });
   } catch (error) {
     console.log("Error in login: ", error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -97,8 +97,8 @@ export const logout = (req, res) => {
     res.cookie("jwt", "", { maxAge: 0 });
     res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    console.log("Error in logout: ", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.log("Error in logout: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
