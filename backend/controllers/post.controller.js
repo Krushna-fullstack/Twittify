@@ -110,9 +110,9 @@ export const likeUnlikePost = async (req, res) => {
       return res.status(404).json({ error: "Post not found" });
     }
 
-    const isLiked = post.likes.includes(userId);
+    const userLikedPost = post.likes.includes(userId);
 
-    if (isLiked) {
+    if (userLikedPost) {
       // Unlike post
       await Post.updateOne({ _id: postId }, { $pull: { likes: userId } });
       await User.updateOne({ _id: userId }, { $pull: { likedPosts: postId } });
