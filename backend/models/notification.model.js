@@ -3,16 +3,15 @@ import mongoose, { Schema } from "mongoose";
 const notificationSchema = new Schema(
   {
     from: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
     to: {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-
     type: {
       type: String,
       required: true,
